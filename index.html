@@ -7,10 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <header class="topo-hotel">
         <div class="logo">
             <img src="https://irp.cdn-website.com/eba97c45/dms3rep/multi/opt/logo+beach+hills-177w.png" alt="Logo do Hotel">
         </div>
+
+        <div class="hero-banner">
+            <div class="hero-badge">Beach Hills • Jantar Buffet</div>
+            <h1>Experiência gastronômica em um ambiente acolhedor</h1>
+            <p>Cardápio completo, noites temáticas e sabor que surpreende. Reserve sua mesa e venha viver uma experiência memorável.</p>
+
+            <div class="hero-actions">
+                <a class="btn-whatsapp" href="tel:333" rel="noopener">Reservar por ramal 333</a>
+                <button class="btn-secundario" type="button" id="ver-cardapio">Ver cardápio</button>
+            </div>
+        </div>
+
         <div class="dias-semana">
             <button class="dia-btn" data-dia="segunda">Seg</button>
             <button class="dia-btn" data-dia="terca">Ter</button>
@@ -20,19 +32,36 @@
             <button class="dia-btn" data-dia="sabado">Sáb</button>
             <button class="dia-btn" data-dia="domingo">Dom</button>
         </div>
-          <div class="dias-semana-info">
-            <h1>Jantar Buffet</h1>
-            <p>nosso jantar do beach hills oferece uma experiência gastronômica inesquecível com uma ampla seleção de pratos deliciosos e tem noites tematicas como quarta, noite de massas e sexta, noite baiana</p>
-            <p>nossos preços são muito acessíveis e são apenas por:</p>
-            <p>R$ 49,90 para adulto;</p>
-            <p>R$ 24,90 para crianças de 6 a 12 anos;</p>
-            <p>crianças de 0 a 5 anos não pagam.</p>
-          </div>
+
+        <div class="info-grid">
+            <div class="info-card destaque">
+                <span class="info-label">Preço</span>
+                <strong>R$ 49,90</strong>
+                <small>adulto</small>
+            </div>
+            <div class="info-card">
+                <span class="info-label">Crianças</span>
+                <strong>R$ 24,90</strong>
+                <small>de 6 a 12 anos</small>
+            </div>
+            <div class="info-card">
+                <span class="info-label">Atendimento</span>
+                <strong>7 dias</strong>
+                <small>ramal 333 • piscina e restaurante</small>
+            </div>
+        </div>
+
+        <div class="info-extra">
+            <p><strong>Kids:</strong> crianças de 0 a 5 anos não pagam.</p>
+        </div>
     </header>
 
     <main>
         <section class="cardapio-container">
-            <h2 id="titulo-cardapio">Selecione um dia da semana</h2>
+            <div class="titulo-area">
+                <span class="mini-tag">Cardápio do dia</span>
+                <h2 id="titulo-cardapio">Selecione um dia da semana</h2>
+            </div>
             <div id="cardapio" class="cardapio"></div>
         </section>
     </main>
