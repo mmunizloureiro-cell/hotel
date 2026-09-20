@@ -251,8 +251,9 @@ function alternarPainelAvaliacoes() {
     const aberto = !painelAvaliacoes.classList.contains('aberto');
     painelAvaliacoes.classList.toggle('aberto', aberto);
     painelAvaliacoes.style.display = aberto ? 'block' : 'none';
-    toggleAvaliacoes.setAttribute('aria-expanded', String(aberto));
     painelAvaliacoes.style.pointerEvents = aberto ? 'auto' : 'none';
+    toggleAvaliacoes.setAttribute('aria-expanded', String(aberto));
+    document.body.style.overflow = aberto ? 'hidden' : '';
 }
 
 function mudarAbaComentario(tab) {
@@ -368,6 +369,7 @@ fecharAvaliacoes.addEventListener('click', () => {
     painelAvaliacoes.style.display = 'none';
     toggleAvaliacoes.setAttribute('aria-expanded', 'false');
     painelAvaliacoes.style.pointerEvents = 'none';
+    document.body.style.overflow = '';
 });
 
 btnConfirmarComentario.addEventListener('click', () => {
