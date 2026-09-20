@@ -1,0 +1,100 @@
+<!DOCTYPEhtml>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hotel jantar buffet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://irp.cdn-website.com/eba97c45/dms3rep/multi/opt/logo+beach+hills-177w.png" alt="Logo do Hotel">
+        </div>
+        <div class="dias-semana">
+            <button class="dia-btn" data-dia="segunda">Seg</button>
+            <button class="dia-btn" data-dia="terca">Ter</button>
+            <button class="dia-btn" data-dia="quarta">Qua</button>
+            <button class="dia-btn" data-dia="quinta">Qui</button>
+            <button class="dia-btn" data-dia="sexta">Sex</button>
+            <button class="dia-btn" data-dia="sabado">Sáb</button>
+            <button class="dia-btn" data-dia="domingo">Dom</button>
+        </div>
+          <div class="dias-semana-info">
+            <h1>Jantar Buffet</h1>
+            <p>nosso jantar do beach hills oferece uma experiência gastronômica inesquecível com uma ampla seleção de pratos deliciosos e tem noites tematicas como quarta, noite de massas e sexta, noite baiana</p>
+            <p>nossos preços são muito acessíveis e são apenas por:</p>
+            <p>R$ 49,90 para adulto;</p>
+            <p>R$ 24,90 para crianças de 6 a 12 anos;</p>
+            <p>crianças de 0 a 5 anos não pagam.</p>
+          </div>
+    </header>
+
+    <main>
+        <section class="cardapio-container">
+            <h2 id="titulo-cardapio">Selecione um dia da semana</h2>
+            <div id="cardapio" class="cardapio"></div>
+        </section>
+    </main>
+
+    <button id="toggle-avaliacoes" class="avaliacoes-toggle" aria-controls="avaliacoes-panel" aria-expanded="false">
+        <span class="avaliacoes-icone">★</span>
+        Comentários
+    </button>
+
+    <aside id="avaliacoes-panel" class="avaliacoes-panel" aria-live="polite">
+        <div class="panel-header">
+            <h3>Comentários</h3>
+            <button id="fechar-avaliacoes" class="fechar-panel" aria-label="Fechar comentários">×</button>
+        </div>
+
+        <div class="tabs-comentarios">
+            <button class="tab-comentario ativo" data-tab="comentar">Comentar</button>
+            <button class="tab-comentario" data-tab="ver">Ver comentários</button>
+        </div>
+
+        <div class="avaliacoes-dias">
+            <button class="avaliacao-dia ativo" data-dia="segunda">Seg</button>
+            <button class="avaliacao-dia" data-dia="terca">Ter</button>
+            <button class="avaliacao-dia" data-dia="quarta">Qua</button>
+            <button class="avaliacao-dia" data-dia="quinta">Qui</button>
+            <button class="avaliacao-dia" data-dia="sexta">Sex</button>
+            <button class="avaliacao-dia" data-dia="sabado">Sáb</button>
+            <button class="avaliacao-dia" data-dia="domingo">Dom</button>
+        </div>
+
+        <div id="comentar-tab" class="conteudo-tab ativo">
+            <form id="form-comentario" class="form-comentario">
+                <label>
+                    Nome
+                    <input id="nome-comentario" type="text" maxlength="40" placeholder="Seu nome" required>
+                </label>
+
+                <label>
+                    Avaliação
+                    <select id="nota-comentario" required>
+                        <option value="5">5 estrelas</option>
+                        <option value="4">4 estrelas</option>
+                        <option value="3">3 estrelas</option>
+                        <option value="2">2 estrelas</option>
+                        <option value="1">1 estrela</option>
+                    </select>
+                </label>
+
+                <label>
+                    Comentário
+                    <textarea id="texto-comentario" rows="3" maxlength="220" placeholder="O que você achou da comida?" required></textarea>
+                </label>
+
+                <button type="submit" class="btn-enviar">Confirmar comentário</button>
+            </form>
+        </div>
+
+        <div id="ver-tab" class="conteudo-tab">
+            <div id="lista-avaliacoes" class="lista-avaliacoes"></div>
+        </div>
+    </aside>
+
+    <script src="script.js"></script>
+</body>
+</html>
