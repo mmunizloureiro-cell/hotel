@@ -37,9 +37,8 @@
         </section>
     </main>
 
-    <button id="toggle-avaliacoes" class="avaliacoes-toggle" aria-controls="avaliacoes-panel" aria-expanded="false">
-        <span class="avaliacoes-icone">★</span>
-        Comentários
+    <button id="toggle-avaliacoes" class="avaliacoes-toggle" aria-controls="avaliacoes-panel" aria-expanded="false" aria-label="Abrir comentários">
+        <span class="avaliacoes-icone">≡</span>
     </button>
 
     <aside id="avaliacoes-panel" class="avaliacoes-panel" aria-live="polite">
@@ -50,7 +49,8 @@
 
         <div class="tabs-comentarios">
             <button class="tab-comentario ativo" data-tab="comentar">Comentar</button>
-            <button class="tab-comentario" data-tab="ver">Ver comentários</button>
+            <button class="tab-comentario" data-tab="recentes">Recentes</button>
+            <button class="tab-comentario" data-tab="uteis">Úteis</button>
         </div>
 
         <div class="avaliacoes-dias">
@@ -86,12 +86,17 @@
                     <textarea id="texto-comentario" rows="3" maxlength="220" placeholder="O que você achou da comida?" required></textarea>
                 </label>
 
-                <button type="submit" class="btn-enviar">Confirmar comentário</button>
+                <button type="button" id="btn-confirmar-comentario" class="btn-enviar">Confirmar comentário</button>
+                <button type="submit" id="btn-publicar-comentario" class="btn-enviar btn-publicar" hidden>Publicar comentário</button>
             </form>
         </div>
 
-        <div id="ver-tab" class="conteudo-tab">
+        <div id="recentes-tab" class="conteudo-tab">
             <div id="lista-avaliacoes" class="lista-avaliacoes"></div>
+        </div>
+
+        <div id="uteis-tab" class="conteudo-tab">
+            <div id="lista-avaliacoes-uteis" class="lista-avaliacoes"></div>
         </div>
     </aside>
 

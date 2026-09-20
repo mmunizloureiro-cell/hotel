@@ -144,14 +144,33 @@ const toggleAvaliacoes = document.getElementById('toggle-avaliacoes');
 const painelAvaliacoes = document.getElementById('avaliacoes-panel');
 const fecharAvaliacoes = document.getElementById('fechar-avaliacoes');
 const listaAvaliacoes = document.getElementById('lista-avaliacoes');
+const listaAvaliacoesUteis = document.getElementById('lista-avaliacoes-uteis');
 const formComentario = document.getElementById('form-comentario');
 const nomeComentario = document.getElementById('nome-comentario');
 const notaComentario = document.getElementById('nota-comentario');
 const textoComentario = document.getElementById('texto-comentario');
+const btnConfirmarComentario = document.getElementById('btn-confirmar-comentario');
+const btnPublicarComentario = document.getElementById('btn-publicar-comentario');
 const tabComentar = document.getElementById('comentar-tab');
-const tabVer = document.getElementById('ver-tab');
+const tabRecentes = document.getElementById('recentes-tab');
+const tabUteis = document.getElementById('uteis-tab');
 
 let diaSelecionado = 'domingo';
+let abaAtual = 'comentar';
+
+function atualizarEstadoConfirmacao() {
+    const nomeValido = nomeComentario.value.trim().length > 0;
+    const textoValido = textoComentario.value.trim().length > 0;
+    const notaValida = Number(notaComentario.value) > 0;
+
+    const formularioValido = nomeValido && textoValido && notaValida;
+
+    btnConfirmarComentario.disabled = !formularioValido;
+    btnConfirmarComentario.style.opacity = formularioValido ? '1' : '0.6';
+    btnConfirmarComentario.style.cursor = formularioValido ? 'pointer' : 'not-allowed';
+    btnPublicarComentario.hidden = true;
+    btnConfirmarComentario.textContent = 'Confirmar comentário';
+}
 
 function gerarEstrelas(nota) {
     return '★'.repeat(nota) + '☆'.repeat(5 - nota);
@@ -179,7 +198,42 @@ function salvarAvaliacoes() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(avaliacoesPorDia));
 }
 
-function mostrarAvaliacoes(dia) {
+function ordenarPorUtilidade(avaliacoes) {
+    return [...avaliacoes].sort((a, b) => {
+        const totalA = (a.util || 0) - (a.naoUtil || 0);
+        const totalB = (b.util || 0) - (b.naoUtil || 0);
+        if (totalB !== totalA) return totalB - totalA;
+        return new Date(b.criadoEm || 0) - new Date(a.criadoEm || 0);
+    });
+}
+
+function renderizarLista(container, avaliacoes, tipo) {
+    if (!avaliacoes.length) {
+        container.innerHTML = '<div class="avaliacao-card vazio">Ainda não há comentários para este dia. Seja o primeiro a avaliar.</div>';
+        return;
+    }
+
+    const lista = tipo === 'uteis'
+        ? ordenarPorUtilidade(avaliacoes)
+        : [...avaliacoes].reverse();
+
+    container.innerHTML = lista.map(avaliacao => `
+        <article class="avaliacao-card">
+            <div class="avaliacao-topo">
+                <strong>${avaliacao.nome}</strong>
+                <button class="btn-delete" data-id="${avaliacao.id}" aria-label="Excluir comentário de ${avaliacao.nome}">Excluir</button>
+            </div>
+            <div class="avaliacao-nota">${gerarEstrelas(avaliacao.nota)}</div>
+            <p>“${avaliacao.comentario}”</p>
+            <div class="avaliacao-acoes">
+                <button class="btn-uteis" data-id="${avaliacao.id}" data-voto="util">Útil (${avaliacao.util || 0})</button>
+                <button class="btn-nao-uteis" data-id="${avaliacao.id}" data-voto="naoUtil">Não útil (${avaliacao.naoUtil || 0})</button>
+            </div>
+        </article>
+    `).join('');
+}
+
+function mostrarAvaliacoes(dia, tipo = abaAtual) {
     diaSelecionado = dia;
     const avaliacoes = avaliacoesPorDia[dia] || [];
 
@@ -187,25 +241,16 @@ function mostrarAvaliacoes(dia) {
         botao.classList.toggle('ativo', botao.dataset.dia === dia);
     });
 
-    if (!avaliacoes.length) {
-        listaAvaliacoes.innerHTML = '<div class="avaliacao-card vazio">Ainda não há comentários para este dia. Seja o primeiro a avaliar.</div>';
-        return;
-    }
+    renderizarLista(listaAvaliacoes, avaliacoes, 'recentes');
+    renderizarLista(listaAvaliacoesUteis, avaliacoes, 'uteis');
 
-    listaAvaliacoes.innerHTML = avaliacoes
-        .slice()
-        .reverse()
-        .map(avaliacao => `
-            <article class="avaliacao-card">
-                <div class="avaliacao-topo">
-                    <strong>${avaliacao.nome}</strong>
-                    <button class="btn-delete" data-id="${avaliacao.id}" aria-label="Excluir comentário de ${avaliacao.nome}">Excluir</button>
-                </div>
-                <div class="avaliacao-nota">${gerarEstrelas(avaliacao.nota)}</div>
-                <p>“${avaliacao.comentario}”</p>
-            </article>
-        `)
-        .join('');
+    if (tipo === 'uteis') {
+        listaAvaliacoesUteis.parentElement.style.display = 'block';
+        listaAvaliacoes.parentElement.style.display = 'none';
+    } else {
+        listaAvaliacoes.parentElement.style.display = 'block';
+        listaAvaliacoesUteis.parentElement.style.display = 'none';
+    }
 }
 
 function alternarPainelAvaliacoes() {
@@ -214,12 +259,30 @@ function alternarPainelAvaliacoes() {
 }
 
 function mudarAbaComentario(tab) {
+    abaAtual = tab;
     botoesTabs.forEach(botao => {
         botao.classList.toggle('ativo', botao.dataset.tab === tab);
     });
 
     tabComentar.classList.toggle('ativo', tab === 'comentar');
-    tabVer.classList.toggle('ativo', tab === 'ver');
+    tabRecentes.classList.toggle('ativo', tab === 'recentes');
+    tabUteis.classList.toggle('ativo', tab === 'uteis');
+
+    if (tab === 'comentar') {
+        tabComentar.style.display = 'block';
+        tabRecentes.style.display = 'none';
+        tabUteis.style.display = 'none';
+    } else if (tab === 'recentes') {
+        tabComentar.style.display = 'none';
+        tabRecentes.style.display = 'block';
+        tabUteis.style.display = 'none';
+        mostrarAvaliacoes(diaSelecionado, 'recentes');
+    } else {
+        tabComentar.style.display = 'none';
+        tabRecentes.style.display = 'none';
+        tabUteis.style.display = 'block';
+        mostrarAvaliacoes(diaSelecionado, 'uteis');
+    }
 }
 
 botoesDias.forEach(botao => {
@@ -255,10 +318,74 @@ botoesTabs.forEach(botao => {
     });
 });
 
+document.addEventListener('click', (event) => {
+    const botaoUtil = event.target.closest('.btn-uteis');
+    const botaoNaoUtil = event.target.closest('.btn-nao-uteis');
+    const botaoExcluir = event.target.closest('.btn-delete');
+
+    if (botaoUtil) {
+        const id = botaoUtil.dataset.id;
+        Object.keys(avaliacoesPorDia).forEach(dia => {
+            avaliacoesPorDia[dia] = (avaliacoesPorDia[dia] || []).map(item => {
+                if (item.id === id) {
+                    return { ...item, util: (item.util || 0) + 1 };
+                }
+                return item;
+            });
+        });
+        salvarAvaliacoes();
+        mostrarAvaliacoes(diaSelecionado, abaAtual);
+        return;
+    }
+
+    if (botaoNaoUtil) {
+        const id = botaoNaoUtil.dataset.id;
+        Object.keys(avaliacoesPorDia).forEach(dia => {
+            avaliacoesPorDia[dia] = (avaliacoesPorDia[dia] || []).map(item => {
+                if (item.id === id) {
+                    return { ...item, naoUtil: (item.naoUtil || 0) + 1 };
+                }
+                return item;
+            });
+        });
+        salvarAvaliacoes();
+        mostrarAvaliacoes(diaSelecionado, abaAtual);
+        return;
+    }
+
+    if (botaoExcluir) {
+        const id = botaoExcluir.dataset.id;
+
+        Object.keys(avaliacoesPorDia).forEach(dia => {
+            avaliacoesPorDia[dia] = (avaliacoesPorDia[dia] || []).filter(item => item.id !== id);
+        });
+
+        salvarAvaliacoes();
+        mostrarAvaliacoes(diaSelecionado, abaAtual);
+    }
+});
+
 toggleAvaliacoes.addEventListener('click', alternarPainelAvaliacoes);
 fecharAvaliacoes.addEventListener('click', () => {
     painelAvaliacoes.classList.remove('aberto');
     toggleAvaliacoes.setAttribute('aria-expanded', 'false');
+});
+
+btnConfirmarComentario.addEventListener('click', () => {
+    const nome = nomeComentario.value.trim();
+    const texto = textoComentario.value.trim();
+    const nota = Number(notaComentario.value);
+
+    if (!nome || !texto || !nota) {
+        atualizarEstadoConfirmacao();
+        return;
+    }
+
+    btnPublicarComentario.hidden = false;
+    btnConfirmarComentario.textContent = 'Comentário confirmado';
+    btnConfirmarComentario.disabled = true;
+    btnConfirmarComentario.style.opacity = '0.9';
+    btnPublicarComentario.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 
 formComentario.addEventListener('submit', (event) => {
@@ -272,38 +399,27 @@ formComentario.addEventListener('submit', (event) => {
         return;
     }
 
-    const confirmarEnvio = window.confirm(`Confirmar comentário de ${nome} com ${nota} estrela(s)?`);
-    if (!confirmarEnvio) {
-        return;
-    }
-
     const novoComentario = {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
         nome,
         nota,
-        comentario: texto
+        comentario: texto,
+        util: 0,
+        naoUtil: 0,
+        criadoEm: new Date().toISOString()
     };
 
     avaliacoesPorDia[diaSelecionado].push(novoComentario);
     salvarAvaliacoes();
     formComentario.reset();
     notaComentario.value = '5';
-    mudarAbaComentario('ver');
-    mostrarAvaliacoes(diaSelecionado);
-});
-
-document.addEventListener('click', (event) => {
-    const botaoExcluir = event.target.closest('.btn-delete');
-    if (!botaoExcluir) return;
-
-    const id = botaoExcluir.dataset.id;
-
-    Object.keys(avaliacoesPorDia).forEach(dia => {
-        avaliacoesPorDia[dia] = (avaliacoesPorDia[dia] || []).filter(item => item.id !== id);
-    });
-
-    salvarAvaliacoes();
-    mostrarAvaliacoes(diaSelecionado);
+    btnPublicarComentario.hidden = true;
+    btnConfirmarComentario.disabled = false;
+    btnConfirmarComentario.style.opacity = '1';
+    btnConfirmarComentario.textContent = 'Confirmar comentário';
+    atualizarEstadoConfirmacao();
+    mudarAbaComentario('recentes');
+    mostrarAvaliacoes(diaSelecionado, 'recentes');
 });
 
 // Função para exibir o cardápio do dia
@@ -354,14 +470,19 @@ function mostrarCardapio(dia) {
     cardapioContainer.innerHTML = html;
 }
 
+['input', 'change'].forEach(evento => {
+    formComentario.addEventListener(evento, atualizarEstadoConfirmacao);
+});
+
 window.addEventListener('DOMContentLoaded', () => {
     carregarAvaliacoes();
     const botaoDomingo = document.querySelector('[data-dia="domingo"]');
     if (botaoDomingo) {
         botaoDomingo.click();
     }
-    mostrarAvaliacoes('domingo');
+    mostrarAvaliacoes('domingo', 'recentes');
     mudarAbaComentario('comentar');
     painelAvaliacoes.classList.remove('aberto');
     notaComentario.value = '5';
+    atualizarEstadoConfirmacao();
 });

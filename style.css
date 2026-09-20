@@ -150,45 +150,52 @@
 
 .avaliacoes-toggle {
     position: fixed;
-    right: 22px;
-    bottom: 22px;
-    z-index: 20;
+    right: 18px;
+    bottom: 20px;
+    z-index: 30;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, #ff7f50, #ff4500);
     color: #fff;
     border: none;
-    border-radius: 999px;
-    padding: 14px 20px;
-    font-weight: 700;
-    font-size: 15px;
+    border-radius: 18px;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(255, 99, 71, 0.35);
+    box-shadow: 0 12px 28px rgba(255, 99, 71, 0.35);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .avaliacoes-toggle:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(255, 99, 71, 0.45);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 15px 32px rgba(255, 99, 71, 0.45);
 }
 
 .avaliacoes-icone {
-    margin-right: 8px;
+    display: inline-block;
+    transform: translateY(-1px);
 }
 
 .avaliacoes-panel {
     position: fixed;
-    right: 20px;
-    bottom: 85px;
-    width: min(360px, calc(100vw - 24px));
-    max-height: 70vh;
+    top: 18px;
+    right: 18px;
+    width: min(370px, calc(100vw - 28px));
+    height: calc(100vh - 36px);
+    max-height: calc(100vh - 36px);
     background: rgba(255, 255, 255, 0.98);
     border: 1px solid #f2d4c4;
-    border-radius: 18px;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
     padding: 18px 14px 12px;
-    z-index: 15;
-    transform: translateX(120%);
+    z-index: 25;
+    transform: translateX(calc(100% + 30px));
     opacity: 0;
-    transition: all 0.25s ease;
+    transition: all 0.28s ease;
     overflow: hidden;
 }
 
@@ -223,10 +230,11 @@
 .tabs-comentarios {
     display: flex;
     background: #fff3ee;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 4px;
     margin-bottom: 12px;
     border: 1px solid #f4d5c8;
+    gap: 4px;
 }
 
 .tab-comentario {
@@ -235,9 +243,10 @@
     background: transparent;
     color: #7d5145;
     font-weight: 700;
-    padding: 9px 8px;
-    border-radius: 8px;
+    padding: 10px 8px;
+    border-radius: 9px;
     cursor: pointer;
+    font-size: 0.74rem;
 }
 
 .tab-comentario.ativo {
@@ -329,6 +338,25 @@
     font-size: 0.92rem;
 }
 
+.avaliacao-acoes {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-uteis,
+.btn-nao-uteis {
+    border: none;
+    background: #fff0ea;
+    color: #6d4a39;
+    border-radius: 999px;
+    padding: 7px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 .form-comentario {
     display: flex;
     flex-direction: column;
@@ -371,6 +399,17 @@
     cursor: pointer;
     min-height: 46px;
     box-shadow: 0 10px 20px rgba(255, 99, 71, 0.2);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-enviar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-publicar {
+    background: linear-gradient(135deg, #ff4500, #d93600);
 }
 
 .btn-delete {
