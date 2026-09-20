@@ -158,18 +158,12 @@ const tabUteis = document.getElementById('uteis-tab');
 let diaSelecionado = 'domingo';
 let abaAtual = 'comentar';
 
-function atualizarEstadoConfirmacao() {
-    const nomeValido = nomeComentario.value.trim().length > 0;
-    const textoValido = textoComentario.value.trim().length > 0;
-    const notaValida = Number(notaComentario.value) > 0;
-
-    const formularioValido = nomeValido && textoValido && notaValida;
-
-    btnConfirmarComentario.disabled = !formularioValido;
-    btnConfirmarComentario.style.opacity = formularioValido ? '1' : '0.6';
-    btnConfirmarComentario.style.cursor = formularioValido ? 'pointer' : 'not-allowed';
+function resetarConfirmacao() {
     btnPublicarComentario.hidden = true;
     btnConfirmarComentario.textContent = 'Confirmar comentário';
+    btnConfirmarComentario.disabled = false;
+    btnConfirmarComentario.style.opacity = '1';
+    btnConfirmarComentario.style.cursor = 'pointer';
 }
 
 function gerarEstrelas(nota) {
@@ -254,8 +248,11 @@ function mostrarAvaliacoes(dia, tipo = abaAtual) {
 }
 
 function alternarPainelAvaliacoes() {
-    const aberto = painelAvaliacoes.classList.toggle('aberto');
+    const aberto = !painelAvaliacoes.classList.contains('aberto');
+    painelAvaliacoes.classList.toggle('aberto', aberto);
+    painelAvaliacoes.style.display = aberto ? 'block' : 'none';
     toggleAvaliacoes.setAttribute('aria-expanded', String(aberto));
+    painelAvaliacoes.style.pointerEvents = aberto ? 'auto' : 'none';
 }
 
 function mudarAbaComentario(tab) {
@@ -368,7 +365,9 @@ document.addEventListener('click', (event) => {
 toggleAvaliacoes.addEventListener('click', alternarPainelAvaliacoes);
 fecharAvaliacoes.addEventListener('click', () => {
     painelAvaliacoes.classList.remove('aberto');
+    painelAvaliacoes.style.display = 'none';
     toggleAvaliacoes.setAttribute('aria-expanded', 'false');
+    painelAvaliacoes.style.pointerEvents = 'none';
 });
 
 btnConfirmarComentario.addEventListener('click', () => {
@@ -377,14 +376,13 @@ btnConfirmarComentario.addEventListener('click', () => {
     const nota = Number(notaComentario.value);
 
     if (!nome || !texto || !nota) {
-        atualizarEstadoConfirmacao();
         return;
     }
 
     btnPublicarComentario.hidden = false;
     btnConfirmarComentario.textContent = 'Comentário confirmado';
     btnConfirmarComentario.disabled = true;
-    btnConfirmarComentario.style.opacity = '0.9';
+    btnConfirmarComentario.style.opacity = '0.85';
     btnPublicarComentario.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 });
 
@@ -413,11 +411,7 @@ formComentario.addEventListener('submit', (event) => {
     salvarAvaliacoes();
     formComentario.reset();
     notaComentario.value = '5';
-    btnPublicarComentario.hidden = true;
-    btnConfirmarComentario.disabled = false;
-    btnConfirmarComentario.style.opacity = '1';
-    btnConfirmarComentario.textContent = 'Confirmar comentário';
-    atualizarEstadoConfirmacao();
+    resetarConfirmacao();
     mudarAbaComentario('recentes');
     mostrarAvaliacoes(diaSelecionado, 'recentes');
 });
@@ -470,10 +464,6 @@ function mostrarCardapio(dia) {
     cardapioContainer.innerHTML = html;
 }
 
-['input', 'change'].forEach(evento => {
-    formComentario.addEventListener(evento, atualizarEstadoConfirmacao);
-});
-
 window.addEventListener('DOMContentLoaded', () => {
     carregarAvaliacoes();
     const botaoDomingo = document.querySelector('[data-dia="domingo"]');
@@ -484,5 +474,5 @@ window.addEventListener('DOMContentLoaded', () => {
     mudarAbaComentario('comentar');
     painelAvaliacoes.classList.remove('aberto');
     notaComentario.value = '5';
-    atualizarEstadoConfirmacao();
+    resetarConfirmacao();
 });
