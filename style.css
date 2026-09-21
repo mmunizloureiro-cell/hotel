@@ -153,8 +153,10 @@
     right: 18px;
     bottom: 20px;
     z-index: 40;
-    width: 58px;
-    height: 58px;
+    width: auto;
+    height: auto;
+    padding: 12px 16px;
+    min-width: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -163,7 +165,7 @@
     border: none;
     border-radius: 18px;
     font-weight: 800;
-    font-size: 30px;
+    font-size: 15px;
     line-height: 1;
     cursor: pointer;
     box-shadow: 0 12px 28px rgba(255, 99, 71, 0.35);
@@ -399,6 +401,18 @@
     border-radius: 12px;
     padding: 12px;
     margin: 0 4px 14px;
+}
+
+.flash-msg {
+    display: block;
+    margin: 8px 4px 12px;
+    padding: 10px 12px;
+    background: linear-gradient(90deg,#e6ffed,#dff7f0);
+    color: #0b6b3a;
+    border: 1px solid #b6f0c7;
+    border-radius: 10px;
+    font-weight: 700;
+    text-align: center;
 }
 
 .form-comentario label {

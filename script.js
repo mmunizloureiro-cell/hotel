@@ -3,48 +3,208 @@ const cardapios = {
     segunda: {
         nome: "Segunda-feira",
         tema: "",
-        pratos: [
-            { nome: "Grelhados variados", descricao: "Carnes nobres na brasa" },
-            { nome: "Frutos do mar", descricao: "Camarão e peixe fresco" },
-            { nome: "Saladas frescas", descricao: "Salada verde, Caesar e caprese" },
-            { nome: "Arroz integral e batata" },
-            { nome: "Sobremesas sortidas", descricao: "Pudim, brownie e frutas" }
+        secoes: [
+            {
+                titulo: "Saladas",
+                itens: [
+                    { nome: "Tomate" },
+                    { nome: "Mix de repolho" },
+                    { nome: "Alface" },
+                    { nome: "Cenoura" }
+                ],
+                acompanhamento: "Vinagrete"
+            },
+            {
+                titulo: "Sopa",
+                itens: [
+                    { nome: "Sopa de legumes com carne" }
+                ],
+                acompanhamento: "Cesta de pães ou torradas • Limão à francesa"
+            },
+            {
+                titulo: "Guarnições",
+                itens: [
+                    { nome: "Arroz branco" },
+                    { nome: "Feijão" },
+                    { nome: "Espaguete à bolonhesa" },
+                    { nome: "Farofa" },
+                    { nome: "Legumes ao vapor" }
+                ]
+            },
+            {
+                titulo: "Pratos Principais",
+                itens: [
+                    { nome: "Alcatra ao molho de champignon" },
+                    { nome: "Filé de peixe ao molho de coco" },
+                    { nome: "Filé de frango grelhado" }
+                ]
+            },
+            {
+                titulo: "Sobremesas",
+                itens: [
+                    { nome: "Gelatina" },
+                    { nome: "Mousse de limão" },
+                    { nome: "Pudim" }
+                ]
+            }
         ]
     },
     terca: {
         nome: "Terça-feira",
         tema: "",
-        pratos: [
-            { nome: "Costela assada", descricao: "Macia e suculenta" },
-            { nome: "Frango com alho", descricao: "Frango grelhado com molho especial" },
-            { nome: "Acompanhamentos", descricao: "Batata, mandioca e milho" },
-            { nome: "Saladas frescas" },
-            { nome: "Mousse de chocolate", descricao: "Leve e saboroso" }
+        secoes: [
+            {
+                titulo: "Saladas e Entradas Frias",
+                itens: [
+                    { nome: "Salada Caprese" },
+                    { nome: "Repolho ao vinagrete" },
+                    { nome: "Mix de folhas" },
+                    { nome: "Chuchu refogado" }
+                ],
+                acompanhamento: "Vinagrete"
+            },
+            {
+                titulo: "Sopa",
+                itens: [
+                    { nome: "Creme de legumes" }
+                ],
+                acompanhamento: "Cesta de pães ou torradas • Limão à francesa"
+            },
+            {
+                titulo: "Guarnições",
+                itens: [
+                    { nome: "Arroz branco" },
+                    { nome: "Feijão" },
+                    { nome: "Purê de batata" },
+                    { nome: "Talharim ao molho de ervas finas" },
+                    { nome: "Farofa" }
+                ]
+            },
+            {
+                titulo: "Pratos Principais",
+                itens: [
+                    { nome: "Picadinho à brasileira" },
+                    { nome: "Filé de frango grelhado ao molho de mostarda" },
+                    { nome: "Filé de peixe ao molho de limão" }
+                ]
+            },
+            {
+                titulo: "Sobremesas",
+                itens: [
+                    { nome: "Gelatina" },
+                    { nome: "Pudim" },
+                    { nome: "Manjar de coco" }
+                ]
+            }
         ]
     },
     quarta: {
         nome: "Quarta-feira",
         tema: "🍝 NOITE DE MASSAS",
-        pratos: [
-            { nome: "Lasanha à bolonhesa", descricao: "Clássica e deliciosa" },
-            { nome: "Fettuccine Alfredo", descricao: "Molho branco cremoso" },
-            { nome: "Penne à Arrabbiata", descricao: "Molho vermelho picante" },
-            { nome: "Rigatoni com cogumelos", descricao: "Molho caseiro especial" },
-            { nome: "Pão de alho fresco" },
-            { nome: "Tiramisú", descricao: "Sobremesa italiana tradicional" },
-            { nome: "Panna Cotta", descricao: "Cremoso e suave" }
+        secoes: [
+            {
+                titulo: "Saladas e Entradas Frias",
+                itens: [
+                    { nome: "Abobrinha grelhada" },
+                    { nome: "Mix de folhas" },
+                    { nome: "Salada italiana" },
+                    { nome: "Ratatouille" }
+                ],
+                acompanhamento: "Vinagrete"
+            },
+            {
+                titulo: "Sopa",
+                itens: [
+                    { nome: "Minestrone" }
+                ],
+                acompanhamento: "Cesta de pães ou torradas • Limão à francesa"
+            },
+            {
+                titulo: "Massas e Pratos Quentes",
+                itens: [
+                    { nome: "Lasanha à bolonhesa" },
+                    { nome: "Lasanha de berinjela" },
+                    { nome: "Canelone de presunto e queijo" },
+                    { nome: "Penne ao molho Aurora" },
+                    { nome: "Nhoque salteado na manteiga e sálvia" }
+                ]
+            },
+            {
+                titulo: "Sobremesas",
+                itens: [
+                    { nome: "Gelatina" },
+                    { nome: "Crostata de frutas" },
+                    { nome: "Pudim" },
+                    { nome: "Tiramisù" }
+                ]
+            },
+            {
+                titulo: "Estação de Massas",
+                itens: [
+                    { nome: "Talharim" },
+                    { nome: "Espaguete" },
+                    { nome: "Fusilli" }
+                ]
+            },
+            {
+                titulo: "Molhos Base",
+                itens: [
+                    { nome: "Molho branco" },
+                    { nome: "Molho sugo" },
+                    { nome: "Molho bolonhesa" },
+                    { nome: "Molho de ervas" },
+                    { nome: "Alho e óleo" }
+                ]
+            }
         ]
     },
     quinta: {
         nome: "Quinta-feira",
         tema: "",
-        pratos: [
-            { nome: "Picanha na brasa", descricao: "Corte suculento e macio" },
-            { nome: "Filé com molho madeira" },
-            { nome: "Peixe grelhado", descricao: "Com limão e temperos aromáticos" },
-            { nome: "Legumes na manteiga" },
-            { nome: "Acompanhamentos variados" },
-            { nome: "Pavê", descricao: "Clássico dessert gelado" }
+        secoes: [
+            {
+                titulo: "Saladas",
+                itens: [
+                    { nome: "Tomate" },
+                    { nome: "Mix de repolho" },
+                    { nome: "Folhas (alface e rúcula)" },
+                    { nome: "Abobrinha refogada" }
+                ],
+                acompanhamento: "Vinagrete"
+            },
+            {
+                titulo: "Sopa",
+                itens: [
+                    { nome: "Canja" }
+                ],
+                acompanhamento: "Cesta de pães ou torradas • Limão à francesa"
+            },
+            {
+                titulo: "Guarnições",
+                itens: [
+                    { nome: "Arroz branco" },
+                    { nome: "Feijão" },
+                    { nome: "Batata rústica" },
+                    { nome: "Espaguete alho e óleo" },
+                    { nome: "Farofa de ovo" }
+                ]
+            },
+            {
+                titulo: "Pratos Principais",
+                itens: [
+                    { nome: "Carne de sol" },
+                    { nome: "Frango assado" },
+                    { nome: "Bisteca suína ao alecrim" }
+                ]
+            },
+            {
+                titulo: "Sobremesas",
+                itens: [
+                    { nome: "Pudim" },
+                    { nome: "Gelatina" },
+                    { nome: "Manjar de chocolate" }
+                ]
+            }
         ]
     },
     sexta: {
@@ -52,50 +212,48 @@ const cardapios = {
         tema: "🇧🇷 NOITE BAIANA",
         secoes: [
             {
-                titulo: "🥗 Saladas",
+                titulo: "Saladas e Entradas Frias",
                 itens: [
-                    { nome: "Mix de folhas" },
-                    { nome: "Feijão branco" },
-                    { nome: "Abobrinha" },
-                    { nome: "Repolho" }
+                    { nome: "Tomate em cubos" },
+                    { nome: "Abóbora com quiabo" },
+                    { nome: "Salada de feijão branco" },
+                    { nome: "Mix de folhas" }
                 ],
                 acompanhamento: "Vinagrete"
             },
             {
-                titulo: "🍲 Sopa",
+                titulo: "Sopa",
                 itens: [
-                    { nome: "Sopa de legumes" }
+                    { nome: "Caldo de frango" }
                 ],
-                acompanhamento: "Cesta de pães/torradas • Limão à francesa"
+                acompanhamento: "Cesta de pães ou torradas • Limão à francesa"
             },
             {
-                titulo: "🍚 Acompanhamentos",
+                titulo: "Guarnições",
                 itens: [
+                    { nome: "Arroz branco" },
                     { nome: "Feijão" },
-                    { nome: "Arroz" }
+                    { nome: "Farofa" },
+                    { nome: "Espaguete na manteiga" },
+                    { nome: "Bobó de camarão" },
+                    { nome: "Vatapá" },
+                    { nome: "Caruru" }
                 ]
             },
             {
-                titulo: "🍤 Pratos Principais",
+                titulo: "Pratos Principais",
                 itens: [
-                    { nome: "Vatapá", descricao: "Prato baiano tradicional" },
-                    { nome: "Caruru", descricao: "Especialidade da culinária baiana" },
-                    { nome: "Bobó de camarão", descricao: "Cremoso e temperado" }
+                    { nome: "Moqueca de peixe" },
+                    { nome: "Xinxim de galinha" },
+                    { nome: "Escalope de carne acebolado" }
                 ]
             },
             {
-                titulo: "🍗 Proteínas",
+                titulo: "Sobremesas",
                 itens: [
-                    { nome: "Xixim de galinha", descricao: "Frango ao molho de dendê" },
-                    { nome: "Bacalhau ao molho de coco", descricao: "Peixe nobre preparado especialmente" }
-                ]
-            },
-            {
-                titulo: "🍰 Sobremesas",
-                itens: [
+                    { nome: "Pudim" },
                     { nome: "Gelatina" },
-                    { nome: "Pudim", descricao: "Com calda de caramelo" },
-                    { nome: "Cocada baiana", descricao: "Doce tradicional de coco" }
+                    { nome: "Doce de leite" }
                 ]
             }
         ]
@@ -103,28 +261,98 @@ const cardapios = {
     sabado: {
         nome: "Sábado",
         tema: "",
-        pratos: [
-            { nome: "Cordeiro assado", descricao: "Premium e macio" },
-            { nome: "Frutos do mar", descricao: "Camarão, polvo e lula" },
-            { nome: "Carnes variadas na brasa" },
-            { nome: "Saladas da casa" },
-            { nome: "Acompanhamentos especiais", descricao: "Batata suíça, legumes refogados" },
-            { nome: "Suflê de chocolate", descricao: "Quente e saboroso" },
-            { nome: "Sorvete artesanal" }
+        secoes: [
+            {
+                titulo: "Saladas",
+                itens: [
+                    { nome: "Tomate à francesa" },
+                    { nome: "Salada de beterraba" },
+                    { nome: "Mix de folhas" },
+                    { nome: "Salpicão de frango" }
+                ],
+                acompanhamento: "Vinagrete"
+            },
+            {
+                titulo: "Sopa",
+                itens: [
+                    { nome: "Caldo verde" }
+                ],
+                acompanhamento: "Cesta de pães ou torradas • Limão à francesa"
+            },
+            {
+                titulo: "Guarnições",
+                itens: [
+                    { nome: "Arroz branco" },
+                    { nome: "Feijão" },
+                    { nome: "Jardineira de legumes" },
+                    { nome: "Fusilli ao molho parmegiana" },
+                    { nome: "Cuscuz de carne seca" }
+                ]
+            },
+            {
+                titulo: "Pratos Principais",
+                itens: [
+                    { nome: "Strogonoff de carne" },
+                    { nome: "Peito de frango grelhado" },
+                    { nome: "Moqueca de peixe" }
+                ]
+            },
+            {
+                titulo: "Sobremesas",
+                itens: [
+                    { nome: "Pudim de leite" },
+                    { nome: "Gelatina" },
+                    { nome: "Cocada mole" }
+                ]
+            }
         ]
     },
     domingo: {
         nome: "Domingo",
         tema: "",
-        pratos: [
-            { nome: "Churrasco completo", descricao: "Seleção de carnes premium" },
-            { nome: "Frango do sertão" },
-            { nome: "Peixe inteiro grelhado" },
-            { nome: "Tropeiro", descricao: "Feijão, carne seca e farinha" },
-            { nome: "Saladas variadas" },
-            { nome: "Acompanhamentos da casa" },
-            { nome: "Pavê doce" },
-            { nome: "Caldas variadas", descricao: "Chocolate, caramelo e morango" }
+        secoes: [
+            {
+                titulo: "Saladas e Entradas Frias",
+                itens: [
+                    { nome: "Salada mista" },
+                    { nome: "Salada russa" },
+                    { nome: "Mix de folhas" }
+                ],
+                acompanhamento: "Vinagrete"
+            },
+            {
+                titulo: "Sopa",
+                itens: [
+                    { nome: "Sopa de legumes" }
+                ],
+                acompanhamento: "Cesta de pães ou torradas • Limão à francesa"
+            },
+            {
+                titulo: "Guarnições",
+                itens: [
+                    { nome: "Arroz branco" },
+                    { nome: "Feijão" },
+                    { nome: "Talharim à bolonhesa" },
+                    { nome: "Batata gratinada" },
+                    { nome: "Farofa de calabresa" }
+                ]
+            },
+            {
+                titulo: "Pratos Principais",
+                itens: [
+                    { nome: "Toscana e alcatra assada" },
+                    { nome: "Bisteca" },
+                    { nome: "Filé de peixe ao molho de coco" }
+                ]
+            },
+            {
+                titulo: "Sobremesas",
+                itens: [
+                    { nome: "Gelatina" },
+                    { nome: "Pudim de leite" },
+                    { nome: "Pavê de chocolate" }
+                ]
+            }
         ]
     }
 };
@@ -416,7 +644,13 @@ formComentario.addEventListener('submit', (event) => {
     resetarConfirmacao();
     mudarAbaComentario('recentes');
     mostrarAvaliacoes(diaSelecionado, 'recentes');
+    // Comentário publicado e salvo; ficará visível para outros hóspedes (sem mensagem adicional)
 });
+
+function mostrarFlash(texto, duracao = 3500) {
+    // função deixada vazia por decisão de não exibir mensagem ao usuário
+    return;
+}
 
 // Função para exibir o cardápio do dia
 function mostrarCardapio(dia) {
