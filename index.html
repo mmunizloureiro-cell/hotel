@@ -1,21 +1,22 @@
-<!DOCTYPEhtml>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hotel jantar buffet</title>
+    <title>Beach Hills | Jantar Buffet</title>
+    <meta name="description" content="Cardápio do jantar buffet do Beach Hills com pratos do dia, horários e informações de atendimento.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="topo-hotel">
         <div class="logo">
-            <img src="https://irp.cdn-website.com/eba97c45/dms3rep/multi/opt/logo+beach+hills-177w.png" alt="Logo do Hotel">
+            <img src="https://irp.cdn-website.com/eba97c45/dms3rep/multi/opt/logo+beach+hills-177w.png" alt="Logo do Hotel Beach Hills" decoding="async" fetchpriority="high">
         </div>
 
         <div class="hero-banner">
             <div class="hero-badge">Beach Hills • Jantar Buffet</div>
-            <h1>Experiência gastronômica em um ambiente acolhedor</h1>
-            <p>Cardápio completo, noites temáticas e sabor que surpreende. Reserve sua mesa e venha viver uma experiência memorável.</p>
+            <h1>Jantar Buffet — experiência gastronômica acolhedora</h1>
+            <p>Cardápio variado com pratos preparados diariamente. Reserve sua mesa para uma experiência memorável.</p>
 
             <div class="hero-actions">
                 <div class="reservas">Reservas: peça ao garçom mais próximo ou ligue para o bar da piscina (ramal 333).</div>
@@ -49,6 +50,11 @@
                 <strong>7 dias</strong>
                 <small>ramal 333 • piscina e restaurante</small>
             </div>
+            <div class="info-card">
+                <span class="info-label">Horário</span>
+                <strong>19:00 – 21:00</strong>
+                <small>Jantar</small>
+            </div>
         </div>
 
         <div class="info-extra">
@@ -62,16 +68,32 @@
                 <span class="mini-tag">Cardápio do dia</span>
                 <h2 id="titulo-cardapio">Selecione um dia da semana</h2>
             </div>
+            <div class="jantar-search-wrap">
+                <label for="jantar-search" class="jantar-search-label">Pesquisar prato no dia selecionado</label>
+                <div class="search-actions">
+                    <input
+                        id="jantar-search"
+                        class="jantar-search-input"
+                        type="search"
+                        placeholder="Ex.: peixe, lasanha, pudim..."
+                        autocomplete="off"
+                    >
+                    <button type="button" id="jantar-search-clear" class="search-clear-btn" aria-label="Limpar busca do jantar">Limpar</button>
+                </div>
+                <p class="search-help">Dica: pressione Enter para rolar até o primeiro resultado.</p>
+            </div>
             <div id="cardapio" class="cardapio"></div>
         </section>
     </main>
 
-    <button id="toggle-avaliacoes" class="avaliacoes-toggle" aria-controls="avaliacoes-panel" aria-expanded="false" aria-label="Abrir comentários">Comentários</button>
+    <a id="toggle-avaliacoes" class="avaliacoes-toggle secao-bar-btn" href="bar.html" aria-label="Abrir seção Bar">Seção Bar</a>
 
     <aside id="avaliacoes-panel" class="avaliacoes-panel" aria-live="polite">
         <div class="panel-header">
             <h3>Comentários</h3>
-            <button id="fechar-avaliacoes" class="fechar-panel" aria-label="Fechar comentários">×</button>
+            <div class="panel-actions">
+                <button id="fechar-avaliacoes" class="fechar-panel" aria-label="Fechar comentários">×</button>
+            </div>
         </div>
 
 
@@ -100,13 +122,7 @@
 
                 <label>
                     Avaliação
-                    <select id="nota-comentario" required>
-                        <option value="5">5 estrelas</option>
-                        <option value="4">4 estrelas</option>
-                        <option value="3">3 estrelas</option>
-                        <option value="2">2 estrelas</option>
-                        <option value="1">1 estrela</option>
-                    </select>
+                    <select id="nota-comentario" required></select>
                 </label>
 
                 <label>
@@ -127,6 +143,12 @@
             <div id="lista-avaliacoes-uteis" class="lista-avaliacoes"></div>
         </div>
     </aside>
+
+
+
+    <!-- Firebase (compat) - preencha as credenciais no script.js -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 
     <script src="script.js"></script>
 </body>

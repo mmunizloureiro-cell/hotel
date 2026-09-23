@@ -357,18 +357,57 @@ const cardapios = {
     }
 };
 
+
+// ========== CONSTANTES E ARMAZENAMENTO ==========
 const STORAGE_KEY = 'hotel-beach-hills-avaliacoes';
 const avaliacoesPorDia = Object.fromEntries(
     Object.keys(cardapios).map(dia => [dia, []])
 );
 
-// Elementos do DOM
+// ========== CONFIGURAÇÃO FIREBASE ==========
+const FIREBASE_CONFIG = {
+    apiKey: "REPLACE_ME",
+    authDomain: "REPLACE_ME",
+    databaseURL: "REPLACE_ME",
+    projectId: "REPLACE_ME",
+    storageBucket: "REPLACE_ME",
+    messagingSenderId: "REPLACE_ME",
+    appId: "REPLACE_ME"
+};
+
+let firebaseApp = null;
+let databaseRef = null;
+
+function initFirebase() {
+    try {
+        firebaseApp = firebase.initializeApp(FIREBASE_CONFIG);
+        const db = firebase.database();
+        databaseRef = db.ref('avaliacoes');
+        databaseRef.on('value', snapshot => {
+            const val = snapshot.val() || {};
+            Object.keys(avaliacoesPorDia).forEach(dia => {
+                avaliacoesPorDia[dia] = Array.isArray(val[dia]) ? val[dia] : (val[dia] ? Object.values(val[dia]) : []);
+            });
+            mostrarAvaliacoes(diaSelecionado, abaAtual);
+        });
+    } catch (e) {
+        console.warn('Firebase não inicializado — cole suas credenciais em FIREBASE_CONFIG');
+    }
+}
+
+function pushToFirebase() {
+    if (!databaseRef) return;
+    databaseRef.set(avaliacoesPorDia).catch(err => console.error('Erro ao gravar no Firebase', err));
+}
+
+// ========== ELEMENTOS DO DOM ==========
 const botoesDias = document.querySelectorAll('.dia-btn');
 const botoesAvaliacoesDias = document.querySelectorAll('.avaliacao-dia');
 const botoesTabs = document.querySelectorAll('.tab-comentario');
 const cardapioContainer = document.getElementById('cardapio');
 const tituloCardapio = document.getElementById('titulo-cardapio');
-const toggleAvaliacoes = document.getElementById('toggle-avaliacoes');
+const jantarSearch = document.getElementById('jantar-search');
+const jantarSearchClear = document.getElementById('jantar-search-clear');
 const painelAvaliacoes = document.getElementById('avaliacoes-panel');
 const fecharAvaliacoes = document.getElementById('fechar-avaliacoes');
 const listaAvaliacoes = document.getElementById('lista-avaliacoes');
@@ -386,6 +425,10 @@ const tabUteis = document.getElementById('uteis-tab');
 let diaSelecionado = 'domingo';
 let abaAtual = 'comentar';
 
+// ========== VARIÁVEIS DE ESTADO ==========
+
+
+// ========== FUNÇÕES AUXILIARES ==========
 function resetarConfirmacao() {
     btnPublicarComentario.hidden = true;
     btnConfirmarComentario.textContent = 'Confirmar comentário';
@@ -396,6 +439,54 @@ function resetarConfirmacao() {
 
 function gerarEstrelas(nota) {
     return '★'.repeat(nota) + '☆'.repeat(5 - nota);
+}
+
+function normalizarTexto(valor) {
+    return (valor || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+}
+
+function aplicarPesquisaJantar() {
+    const termo = normalizarTexto(jantarSearch ? jantarSearch.value : '');
+    const pratos = cardapioContainer.querySelectorAll('.prato');
+    let primeiro = null;
+    let encontrou = false;
+
+    pratos.forEach(prato => {
+        const texto = normalizarTexto(prato.textContent);
+        const mostrar = !termo || texto.includes(termo);
+        prato.style.display = mostrar ? '' : 'none';
+        prato.classList.remove('jantar-search-hit');
+        if (mostrar) {
+            encontrou = true;
+            if (!primeiro) primeiro = prato;
+        }
+    });
+
+    const secoes = cardapioContainer.querySelectorAll('.secao-cardapio');
+    secoes.forEach(secao => {
+        const visiveis = secao.querySelectorAll('.prato:not([style*="display: none"])').length;
+        secao.style.display = visiveis > 0 || !termo ? '' : 'none';
+    });
+
+    const avisoAtual = cardapioContainer.querySelector('.jantar-empty-search');
+    if (termo && !encontrou) {
+        if (!avisoAtual) {
+            const aviso = document.createElement('div');
+            aviso.className = 'cardapio-vazio jantar-empty-search';
+            aviso.textContent = 'Nenhum prato encontrado para esta busca neste dia.';
+            cardapioContainer.appendChild(aviso);
+        }
+    } else if (avisoAtual) {
+        avisoAtual.remove();
+    }
+
+    if (termo && primeiro) {
+        primeiro.classList.add('jantar-search-hit');
+    }
 }
 
 function carregarAvaliacoes() {
@@ -420,6 +511,7 @@ function salvarAvaliacoes() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(avaliacoesPorDia));
 }
 
+
 function ordenarPorUtilidade(avaliacoes) {
     return [...avaliacoes].sort((a, b) => {
         const totalA = (a.util || 0) - (a.naoUtil || 0);
@@ -431,7 +523,7 @@ function ordenarPorUtilidade(avaliacoes) {
 
 function renderizarLista(container, avaliacoes, tipo) {
     if (!avaliacoes.length) {
-        container.innerHTML = '<div class="avaliacao-card vazio">Ainda não há comentários para este dia. Seja o primeiro a avaliar.</div>';
+        container.innerHTML = `<div class="avaliacao-card vazio">Ainda não há comentários para este dia. Seja o primeiro a avaliar.</div>`;
         return;
     }
 
@@ -443,7 +535,7 @@ function renderizarLista(container, avaliacoes, tipo) {
         <article class="avaliacao-card">
             <div class="avaliacao-topo">
                 <strong>${avaliacao.nome}</strong>
-                <button class="btn-delete" data-id="${avaliacao.id}" aria-label="Excluir comentário de ${avaliacao.nome}">Excluir</button>
+                <button class="btn-delete" data-id="${avaliacao.id}" aria-label="Excluir ${avaliacao.nome}">Excluir</button>
             </div>
             <div class="avaliacao-nota">${gerarEstrelas(avaliacao.nota)}</div>
             <p>“${avaliacao.comentario}”</p>
@@ -480,7 +572,6 @@ function alternarPainelAvaliacoes() {
     painelAvaliacoes.classList.toggle('aberto', aberto);
     painelAvaliacoes.style.display = aberto ? 'block' : 'none';
     painelAvaliacoes.style.pointerEvents = aberto ? 'auto' : 'none';
-    toggleAvaliacoes.setAttribute('aria-expanded', String(aberto));
     document.body.style.overflow = aberto ? 'hidden' : '';
 }
 
@@ -560,6 +651,7 @@ document.addEventListener('click', (event) => {
             });
         });
         salvarAvaliacoes();
+        pushToFirebase();
         mostrarAvaliacoes(diaSelecionado, abaAtual);
         return;
     }
@@ -575,6 +667,7 @@ document.addEventListener('click', (event) => {
             });
         });
         salvarAvaliacoes();
+        pushToFirebase();
         mostrarAvaliacoes(diaSelecionado, abaAtual);
         return;
     }
@@ -587,15 +680,14 @@ document.addEventListener('click', (event) => {
         });
 
         salvarAvaliacoes();
+        pushToFirebase();
         mostrarAvaliacoes(diaSelecionado, abaAtual);
     }
 });
 
-toggleAvaliacoes.addEventListener('click', alternarPainelAvaliacoes);
 fecharAvaliacoes.addEventListener('click', () => {
     painelAvaliacoes.classList.remove('aberto');
     painelAvaliacoes.style.display = 'none';
-    toggleAvaliacoes.setAttribute('aria-expanded', 'false');
     painelAvaliacoes.style.pointerEvents = 'none';
     document.body.style.overflow = '';
 });
@@ -639,6 +731,7 @@ formComentario.addEventListener('submit', (event) => {
 
     avaliacoesPorDia[diaSelecionado].push(novoComentario);
     salvarAvaliacoes();
+    pushToFirebase();
     formComentario.reset();
     notaComentario.value = '5';
     resetarConfirmacao();
@@ -647,30 +740,21 @@ formComentario.addEventListener('submit', (event) => {
     // Comentário publicado e salvo; ficará visível para outros hóspedes (sem mensagem adicional)
 });
 
-function mostrarFlash(texto, duracao = 3500) {
-    // função deixada vazia por decisão de não exibir mensagem ao usuário
-    return;
-}
-
-// Função para exibir o cardápio do dia
 function mostrarCardapio(dia) {
     const dados = cardapios[dia];
-    
     if (!dados) {
         cardapioContainer.innerHTML = '<div class="cardapio-vazio">Cardápio não encontrado</div>';
         return;
     }
-    
+
     const tema = dados.tema ? ` - ${dados.tema}` : '';
     tituloCardapio.textContent = `Cardápio de ${dados.nome}${tema}`;
-    
+
     let html = '';
-    
     if (dados.secoes) {
         dados.secoes.forEach(secao => {
             html += '<div class="secao-cardapio">';
             html += `<h3 class="titulo-secao">${secao.titulo}</h3>`;
-            
             secao.itens.forEach(prato => {
                 html += '<div class="prato">';
                 html += `<span class="prato-nome">${prato.nome}</span>`;
@@ -679,36 +763,65 @@ function mostrarCardapio(dia) {
                 }
                 html += '</div>';
             });
-            
             if (secao.acompanhamento) {
                 html += `<div class="acompanhamento-info"><strong>Acompanhamento:</strong> ${secao.acompanhamento}</div>`;
             }
-            
-            html += '</div>';
-        });
-    } else {
-        dados.pratos.forEach(prato => {
-            html += '<div class="prato">';
-            html += `<div class="prato-nome">${prato.nome}</div>`;
-            if (prato.descricao) {
-                html += `<div class="prato-descricao">${prato.descricao}</div>`;
-            }
             html += '</div>';
         });
     }
-    
+
     cardapioContainer.innerHTML = html;
+    aplicarPesquisaJantar();
 }
 
+// ========== INICIALIZAÇÃO ==========
 window.addEventListener('DOMContentLoaded', () => {
     carregarAvaliacoes();
     const botaoDomingo = document.querySelector('[data-dia="domingo"]');
-    if (botaoDomingo) {
-        botaoDomingo.click();
-    }
+    if (botaoDomingo) botaoDomingo.click();
     mostrarAvaliacoes('domingo', 'recentes');
     mudarAbaComentario('comentar');
     painelAvaliacoes.classList.remove('aberto');
     notaComentario.value = '5';
     resetarConfirmacao();
+
+    // Preencher opções de nota
+    const notasTexto = ['5 estrelas', '4 estrelas', '3 estrelas', '2 estrelas', '1 estrela'];
+    notaComentario.innerHTML = '';
+    notasTexto.forEach((txt, idx) => {
+        const opt = document.createElement('option');
+        opt.value = String(5 - idx);
+        opt.textContent = txt;
+        notaComentario.appendChild(opt);
+    });
+    notaComentario.value = '5';
+
+    // Inicializar Firebase
+    initFirebase();
+
+    if (jantarSearch) {
+        jantarSearch.addEventListener('input', aplicarPesquisaJantar);
+        jantarSearch.addEventListener('keydown', (event) => {
+            if (event.key !== 'Enter') return;
+            event.preventDefault();
+            const destaque = document.querySelector('.prato.jantar-search-hit');
+            if (destaque) {
+                destaque.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+
+        jantarSearch.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
+            jantarSearch.value = '';
+            aplicarPesquisaJantar();
+        });
+    }
+
+    if (jantarSearchClear && jantarSearch) {
+        jantarSearchClear.addEventListener('click', () => {
+            jantarSearch.value = '';
+            aplicarPesquisaJantar();
+            jantarSearch.focus();
+        });
+    }
 });

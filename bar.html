@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Hills | Bar</title>
+    <meta name="description" content="Cardápio do Bar Beach Hills com drinks, coquetéis, destilados, petiscos e combos.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topo-hotel">
+        <div class="logo">
+            <img src="https://irp.cdn-website.com/eba97c45/dms3rep/multi/opt/logo+beach+hills-177w.png" alt="Logo do Hotel Beach Hills" decoding="async" fetchpriority="high">
+        </div>
+
+        <div class="hero-banner">
+            <div class="hero-badge">Beach Hills • Seção Bar</div>
+            <h1>Seção Bar — Drinks, Destilados e Petiscos</h1>
+            <p>Uma seleção especial para aproveitar com conforto e bom atendimento. Consulte o garçom para sugestões da casa.</p>
+            <div class="hero-actions">
+                <div class="reservas">Reservas: peça ao garçom ou ligue para o bar (ramal 333).</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cardapio-container bar-page">
+        <section class="titulo-area">
+            <span class="mini-tag">Cardápio do Bar</span>
+            <h2 id="titulo-bar">Escolha uma seção</h2>
+        </section>
+
+        <div class="bar-search-wrap">
+            <label for="bar-search" class="bar-search-label">Pesquisar no cardápio</label>
+            <div class="search-actions">
+                <input
+                    id="bar-search"
+                    class="bar-search-input"
+                    type="search"
+                    placeholder="Ex.: mojito, whisky, açaí, pizza..."
+                    autocomplete="off"
+                >
+                <button type="button" id="bar-search-clear" class="search-clear-btn" aria-label="Limpar busca do bar">Limpar</button>
+            </div>
+            <p class="search-help">Dica: pressione Enter para rolar até o primeiro resultado.</p>
+        </div>
+
+        <nav class="bar-tabs" aria-label="Navegação do cardápio do bar">
+            <button type="button" class="bar-tab ativo" data-target="drinks">Drinks & Coquetéis</button>
+            <button type="button" class="bar-tab" data-target="destilados">Destilados & Doses</button>
+            <button type="button" class="bar-tab" data-target="whisky">Whisky</button>
+            <button type="button" class="bar-tab" data-target="energeticos">Energéticos</button>
+            <button type="button" class="bar-tab" data-target="combos">Combos</button>
+            <button type="button" class="bar-tab" data-target="vinhos">Vinhos</button>
+            <button type="button" class="bar-tab" data-target="cafe">Café & Chá</button>
+            <button type="button" class="bar-tab" data-target="gelados">Gelados</button>
+            <button type="button" class="bar-tab" data-target="petiscos">Petiscos</button>
+            <button type="button" class="bar-tab" data-target="sanduiches">Sanduíches</button>
+            <button type="button" class="bar-tab" data-target="pizzas">Pizzas</button>
+            <button type="button" class="bar-tab" data-target="bebidas">Bebidas</button>
+            <button type="button" class="bar-tab" data-target="cervejas">Cervejas</button>
+        </nav>
+
+        <section id="drinks" class="menu-section bar-panel ativo">
+            <h2>Drinks & Coquetéis</h2>
+
+            <div class="menu-item">
+                <h4>Capeta <span class="price">R$ 19,90</span></h4>
+                <p>Vodka, suco de abacaxi, leite condensado, creme de leite, canela em pó e guaraná em pó.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Caipirinha <span class="price">R$ 15,00</span></h4>
+                <p>Cachaça, limão, açúcar e gelo.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Caipivodka <span class="price">R$ 24,90</span></h4>
+                <p>Vodka, limão, açúcar e gelo.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Batida de Maracujá <span class="price">R$ 19,90</span></h4>
+                <p>Cachaça, suco de maracujá, leite condensado, creme de leite e gelo.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Batida da Bahia <span class="price">R$ 19,90</span></h4>
+                <p>Cachaça, leite de coco, leite condensado e gelo.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Gin Tônica <span class="price">R$ 19,90</span></h4>
+                <p>Gin, água tônica e gelo.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Aperol Spritz <span class="price">R$ 21,00</span></h4>
+                <p>Espumante, Aperol, água com gás, laranja e gelo.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Dry Martini <span class="price">R$ 24,90</span></h4>
+                <p>Gin, vermute e azeitona.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Cuba Libre <span class="price">R$ 24,90</span></h4>
+                <p>Rum, Coca-Cola, gelo e limão.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Pina Colada <span class="price">R$ 19,90</span></h4>
+                <p>Rum, abacaxi, leite condensado e leite de coco.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Margarita <span class="price">R$ 24,90</span></h4>
+                <p>Tequila, suco de limão, licor Cointreau, gelo e sal.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Mojito <span class="price">R$ 19,90</span></h4>
+                <p>Rum branco, suco de limão, água com gás, hortelã e gelo triturado.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Batida de Frutas Vermelhas (Seleta) <span class="price">R$ 24,90</span></h4>
+                <p>Cachaça seleta, morango, groselha, amora, creme de leite e leite condensado.</p>
+            </div>
+
+            <div class="menu-item">
+                <h4>Batida de Frutas Vermelhas <span class="price">R$ 19,90</span></h4>
+                <p>Morango, groselha, amora, creme de leite e leite condensado.</p>
+            </div>
+        </section>
+
+        <section id="destilados" class="menu-section bar-panel">
+            <h2>Destilados & Doses</h2>
+            <div class="menu-item"><h4>Aguardente <span class="price">R$ 5,50</span></h4></div>
+            <div class="menu-item"><h4>Cachaça Seleta <span class="price">R$ 9,90</span></h4></div>
+            <div class="menu-item"><h4>Campari <span class="price">R$ 12,90</span></h4></div>
+            <div class="menu-item"><h4>Conhaque Domecq <span class="price">R$ 8,50</span></h4></div>
+            <div class="menu-item"><h4>Rum Prata <span class="price">R$ 12,90</span></h4></div>
+            <div class="menu-item"><h4>Rum Ouro <span class="price">R$ 12,90</span></h4></div>
+            <div class="menu-item"><h4>Vodka <span class="price">R$ 12,90</span></h4></div>
+            <div class="menu-item"><h4>Gin <span class="price">R$ 14,90</span></h4></div>
+            <div class="menu-item"><h4>Tequila Ouro <span class="price">R$ 19,90</span></h4></div>
+        </section>
+
+        <section id="whisky" class="menu-section bar-panel">
+            <h2>Whisky</h2>
+            <div class="menu-item"><h4>Whisky Nacional <span class="price">R$ 14,90</span></h4></div>
+            <div class="menu-item"><h4>Johnnie Walker Red Label <span class="price">R$ 18,00</span></h4></div>
+            <div class="menu-item"><h4>Johnnie Walker Black Label <span class="price">R$ 29,90</span></h4></div>
+        </section>
+
+        <section id="energeticos" class="menu-section bar-panel">
+            <h2>Energéticos</h2>
+            <div class="menu-item"><h4>Red Bull <span class="price">R$ 18,00</span></h4></div>
+        </section>
+
+        <section id="combos" class="menu-section bar-panel">
+            <h2>Combos (4 unidades)</h2>
+            <div class="menu-item"><h4>Brahma 600ml (4 unid.) <span class="price">R$ 76,00</span></h4></div>
+            <div class="menu-item"><h4>Amstel 600ml (4 unid.) <span class="price">R$ 76,00</span></h4></div>
+            <div class="menu-item"><h4>Original 600ml (4 unid.) <span class="price">R$ 76,00</span></h4></div>
+            <div class="menu-item"><h4>Heineken 600ml (4 unid.) <span class="price">R$ 89,00</span></h4></div>
+        </section>
+
+        <section id="vinhos" class="menu-section bar-panel">
+            <h2>Vinhos & Espumante</h2>
+            <p>Consulte um garçom para rótulos e preços.</p>
+        </section>
+
+        <section id="cafe" class="menu-section bar-panel">
+            <h2>Café & Chá</h2>
+            <div class="menu-item"><h4>Café Expresso (Três Corações) <span class="price">R$ 8,00</span></h4></div>
+            <div class="menu-item"><h4>Café Coado <span class="price">R$ 7,00</span></h4></div>
+            <div class="menu-item"><h4>Cappuccino (Três Corações) <span class="price">R$ 7,00</span></h4></div>
+            <div class="menu-item"><h4>Chocolatto (Três Corações) <span class="price">R$ 8,00</span></h4></div>
+            <div class="menu-item"><h4>Chás (consultar sabores) <span class="price">R$ 8,00</span></h4></div>
+        </section>
+
+        <section id="gelados" class="menu-section bar-panel">
+            <h2>Gelados</h2>
+            <div class="menu-item"><h4>Açaí <span class="price">R$ 19,90</span></h4></div>
+            <div class="menu-item"><h4>Picolés <span class="price">Consultar no bar</span></h4></div>
+        </section>
+
+        <section id="petiscos" class="menu-section bar-panel">
+            <h2>Petiscos</h2>
+            <div class="menu-item"><h4>Porção de Pastel 6 unid. (pizza, carne ou queijo) <span class="price">R$ 34,90</span></h4></div>
+            <div class="menu-item"><h4>Porção de Quibe 8 unid. <span class="price">R$ 29,90</span></h4></div>
+            <div class="menu-item"><h4>Porção de Coxinha 10 unid. <span class="price">R$ 29,90</span></h4></div>
+            <div class="menu-item"><h4>Coxinha de Frango (unidade) <span class="price">R$ 19,90</span></h4></div>
+            <div class="menu-item"><h4>Aipim Frito 400g <span class="price">R$ 31,90</span></h4></div>
+            <div class="menu-item"><h4>Batata Frita 400g <span class="price">R$ 39,90</span></h4></div>
+            <div class="menu-item"><h4>Calabresa Acebolada 400g <span class="price">R$ 44,90</span></h4></div>
+            <div class="menu-item"><h4>Calabresa Acebolada com Fritas ou Aipim <span class="price">R$ 59,90</span></h4></div>
+            <div class="menu-item"><h4>Frango a Passarinho 600g <span class="price">R$ 54,90</span></h4></div>
+            <div class="menu-item"><h4>Frango a Passarinho com Fritas (600g + 200g) <span class="price">R$ 69,90</span></h4></div>
+            <div class="menu-item"><h4>Isca de Frango 400g <span class="price">R$ 39,90</span></h4></div>
+            <div class="menu-item"><h4>Isca de Peixe 400g <span class="price">R$ 69,90</span></h4></div>
+            <div class="menu-item"><h4>Carne de Sol com Fritas ou Aipim (400g + 300g) <span class="price">R$ 79,90</span></h4></div>
+            <div class="menu-item"><h4>Camarão Crocante 400g <span class="price">R$ 69,90</span></h4></div>
+            <div class="menu-item"><h4>Manjubinha Frita 500g <span class="price">R$ 59,90</span></h4></div>
+            <div class="menu-item"><h4>Batata Frita do Chefe 600g <span class="price">R$ 59,90</span></h4><p>Batata frita, parmesão, bacon e mussarela.</p></div>
+
+            <h3>Adicionais</h3>
+            <div class="menu-item"><h4>Ovo <span class="price">R$ 9,90</span></h4></div>
+            <div class="menu-item"><h4>Bacon <span class="price">R$ 9,90</span></h4></div>
+            <div class="menu-item"><h4>Mussarela <span class="price">R$ 9,90</span></h4></div>
+            <div class="menu-item"><h4>Carne de Hambúrguer 120g <span class="price">R$ 9,90</span></h4></div>
+        </section>
+
+        <section id="sanduiches" class="menu-section bar-panel">
+            <h2>Sanduíches</h2>
+            <div class="menu-item"><h4>Lanche do Chefe (serve 2 pessoas) <span class="price">R$ 59,90</span></h4><p>Pão de hambúrguer especial, hambúrguer 200g, presunto, calabresa, milho verde, ovo, mussarela, alface, tomate e batata frita.</p></div>
+            <div class="menu-item"><h4>Misto Quente <span class="price">R$ 25,90</span></h4><p>Pão de forma, mussarela e presunto.</p></div>
+            <div class="menu-item"><h4>Queijo Quente <span class="price">R$ 19,90</span></h4><p>Pão de forma e mussarela.</p></div>
+            <div class="menu-item"><h4>Hambúrguer <span class="price">R$ 29,90</span></h4><p>Pão de hambúrguer e hambúrguer 120g.</p></div>
+            <div class="menu-item"><h4>Bauru <span class="price">R$ 19,90</span></h4><p>Pão de forma, mussarela, presunto, alface e tomate.</p></div>
+            <div class="menu-item"><h4>X-Búrguer <span class="price">R$ 39,90</span></h4><p>Pão de hambúrguer, hambúrguer 120g e mussarela.</p></div>
+            <div class="menu-item"><h4>X-Salada <span class="price">R$ 39,90</span></h4><p>Pão de hambúrguer, hambúrguer 120g, mussarela, alface e tomate.</p></div>
+            <div class="menu-item"><h4>X-Bacon <span class="price">R$ 42,90</span></h4><p>Pão de hambúrguer, hambúrguer 120g, mussarela, bacon, alface e tomate.</p></div>
+            <div class="menu-item"><h4>X-Egg <span class="price">R$ 42,90</span></h4><p>Pão de hambúrguer, hambúrguer 120g, ovo, mussarela, alface e tomate.</p></div>
+        </section>
+
+        <section id="pizzas" class="menu-section bar-panel">
+            <h2>Pizzas</h2>
+            <div class="menu-item"><h4>Pizza brotinho (pequena) <span class="price">R$ 29,90</span></h4></div>
+            <div class="menu-item"><h4>Mussarela <span class="price">R$ 49,90</span></h4><p>Molho de tomate, mussarela e azeitona.</p></div>
+            <div class="menu-item"><h4>Margherita <span class="price">R$ 49,90</span></h4><p>Molho de tomate, mussarela, manjericão e azeitona.</p></div>
+            <div class="menu-item"><h4>Calabresa <span class="price">R$ 49,90</span></h4><p>Molho de tomate, mussarela, calabresa, cebola e azeitona.</p></div>
+            <div class="menu-item"><h4>Portuguesa <span class="price">R$ 54,90</span></h4><p>Molho de tomate, mussarela, ovo, presunto, cebola e azeitona.</p></div>
+            <div class="menu-item"><h4>Frango com Requeijão <span class="price">R$ 59,90</span></h4><p>Molho de tomate, frango, requeijão e azeitona.</p></div>
+        </section>
+
+        <section id="bebidas" class="menu-section bar-panel">
+            <h2>Bebidas</h2>
+            <div class="menu-item"><h4>Água sem gás 500ml <span class="price">R$ 4,00</span></h4></div>
+            <div class="menu-item"><h4>Água com gás <span class="price">R$ 5,00</span></h4></div>
+            <div class="menu-item"><h4>Água tônica <span class="price">R$ 7,50</span></h4></div>
+            <div class="menu-item"><h4>Água de coco <span class="price">R$ 10,00</span></h4></div>
+            <div class="menu-item"><h4>Refrigerante 350ml <span class="price">R$ 8,00</span></h4></div>
+            <div class="menu-item"><h4>Refrigerante PET 1L <span class="price">R$ 12,90</span></h4></div>
+            <div class="menu-item"><h4>Suco de polpa (copo) <span class="price">R$ 9,90</span></h4></div>
+            <div class="menu-item"><h4>Suco natural (copo) <span class="price">R$ 12,90</span></h4></div>
+            <div class="menu-item"><h4>Suco Bronze (copo) <span class="price">R$ 14,90</span></h4><p>Laranja e cenoura.</p></div>
+            <div class="menu-item"><h4>Suco Digestivo (copo) <span class="price">R$ 14,90</span></h4><p>Abacaxi e hortelã.</p></div>
+            <div class="menu-item"><h4>Suco de limão (copo) <span class="price">R$ 9,90</span></h4></div>
+            <div class="menu-item"><h4>Combo água sem gás (5 unid.) <span class="price">R$ 14,90</span></h4></div>
+        </section>
+
+        <section id="cervejas" class="menu-section bar-panel">
+            <h2>Cervejas</h2>
+            <div class="menu-item"><h4>Brahma 600ml <span class="price">R$ 18,00</span></h4></div>
+            <div class="menu-item"><h4>Original 600ml <span class="price">R$ 18,00</span></h4></div>
+            <div class="menu-item"><h4>Amstel 600ml <span class="price">R$ 18,00</span></h4></div>
+            <div class="menu-item"><h4>Heineken 600ml <span class="price">R$ 22,90</span></h4></div>
+            <div class="menu-item"><h4>Heineken Long Neck <span class="price">R$ 14,90</span></h4></div>
+            <div class="menu-item"><h4>Corona Zero <span class="price">R$ 14,90</span></h4></div>
+        </section>
+    </main>
+
+    <a id="voltar-jantar" class="avaliacoes-toggle secao-bar-btn" href="index.html" aria-label="Voltar para seção do jantar">Seção Jantar</a>
+
+    <script src="bar.js"></script>
+</body>
+</html>
